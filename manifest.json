@@ -1,0 +1,33 @@
+{
+    "manifest_version": 2,
+    "name": "TaoTry",
+    "description": "Appy Taobao try automaticly",
+    "version": "1.0",
+    
+    "content_scripts": [{
+        "matches": ["*://login.taobao.com/*"],
+        "js": ["javascripts/login.js"]
+    },{
+        "matches": ["*://try.taobao.com/*"],
+        "js": ["javascripts/getcoin.js"]
+    }],
+    "permissions": [
+        "tabs",
+        "notifications",        
+        "*://*.taobao.com/*",
+        "*://*.tmall.com/*",
+        "*://*.etao.com/*"
+    ],
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "browser_action": {
+        "default_icon": "icons/16.png",
+        "default_title": "TaoTry",
+        "default_popup": "popup.html"
+    },
+    "icons": { 
+        "16": "icons/16.png",
+        "48": "icons/48.png",
+        "64": "icons/128.png",
+        "128": "icons/128.png"
+    }
+}
