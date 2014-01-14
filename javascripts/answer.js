@@ -16,6 +16,9 @@ if(para.viewfrom){
         chrome.runtime.sendMessage({
             'action': 'keyword'
         }, function(response) {
+            var arr = {
+                '试用品申请成功后需提交':'试用报告'
+            }
             var list=document.querySelectorAll('.attributes-list li');
             var ans;
             for (var i = 0; i < list.length; i++) {
@@ -23,18 +26,19 @@ if(para.viewfrom){
                     ans=list[i].title;
                 }
             };
-            if(!ans && response.keyword=='试用品申请成功后需提交'){
-                ans='试用报告';
+            if(!ans && arr[response.keyword]){
+                ans=arr[response.keyword];
+            }
+            if(!ans){
+                ans='找不到答案';
             }
             chrome.runtime.sendMessage({
                 action: "answer",
                 answer: ans
             });
-            if(ans){
-                chrome.runtime.sendMessage({
-                    action: "closetab"
-                });
-            }
+            chrome.runtime.sendMessage({
+                action: "closetab"
+            });
         });
     });
 }
