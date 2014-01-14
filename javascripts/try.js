@@ -23,9 +23,9 @@ window.addEventListener('load', function(){
                 btn[i].innerText += "√";
             }
         }
-        if(scroller){
+        if(scroller.length){
             editList();
-            //try list next page
+            //next page of try list
             var count=0;
             document.querySelector(".try-list-content").addEventListener("DOMNodeInserted", function(e) {
                 count++;
