@@ -32,7 +32,7 @@ if(para.from=='taotry'){
                     document.querySelector('#J_AnswerInput').value=answer;
                     document.querySelector('.try-detail-buy').dispatchEvent(evt);
                     setTimeout(function(){
-                        if(answer=='找不到答案' && document.querySelector('.detail-error')){
+                        if(answer=='找不到答案' || document.querySelector('.detail-error')){
                             chrome.runtime.sendMessage({
                                 action: "notify",
                                 title: 'TaoTry',
