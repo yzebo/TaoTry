@@ -17,7 +17,10 @@ if(para.from=='taotry'){
         var answer="";
         var evt = document.createEvent("MouseEvents");
         evt.initEvent("click", true, true);
-        document.querySelector('.pic a').dispatchEvent(evt);
+        chrome.runtime.sendMessage({
+            action: 'newTab',
+            taburl: document.querySelector('.pic a').href
+        });
         chrome.runtime.sendMessage({
             action: 'question',
             keyword: keyword
@@ -43,7 +46,7 @@ if(para.from=='taotry'){
                         setTimeout(function(){
                             if(document.querySelector('.fy-icon')){
                                 chrome.runtime.sendMessage({
-                                    action: "closetab"
+                                    action: "closeTab"
                                 });
                             }
                         },1000);

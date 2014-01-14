@@ -25,7 +25,11 @@ chrome.runtime.onMessage.addListener(
         case 'notify':
             notify(request.title, request.msg);
             break;
-        case 'closetab':
+        case 'newTab':
+            chrome.tabs.create({'url': request.taburl, 'active': false}, function(){});
+            console.log(request.taburl);
+            break;
+        case 'closeTab':
             chrome.tabs.remove(sender.tab.id, function(){});
             break;
         }
