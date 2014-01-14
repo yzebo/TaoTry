@@ -14,6 +14,7 @@ window.addEventListener('load', function(){
         var btn=document.querySelectorAll(".free-try");
         for(var i=0;i<list.length;i++){
             list[i].href += '&from=taotry';
+            btn[i].href += '&from=taotry';
             btn[i].innerText += "√";
         }
     }, 2000);
