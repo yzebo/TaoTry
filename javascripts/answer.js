@@ -16,13 +16,13 @@ if(para.viewfrom){
         chrome.runtime.sendMessage({
             'action': 'keyword'
         }, function(response) {
-            var arr = {
+            var arr = {     //normal answer array
                 '试用品申请成功后需提交':'试用报告'
             }
             var list=document.querySelectorAll('.attributes-list li');
             var ans;
             for (var i = 0; i < list.length; i++) {
-                if(list[i].innerHTML.indexOf(response.keyword)>=0){
+                if(list[i].innerHTML.indexOf(response.keyword+':')>=0){
                     ans=list[i].title;
                 }
             };
@@ -37,7 +37,7 @@ if(para.viewfrom){
                 answer: ans
             });
             chrome.runtime.sendMessage({
-                action: "closetab"
+                action: "closeTab"
             });
         });
     });
