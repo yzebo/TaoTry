@@ -19,7 +19,7 @@ if(para.from=='taotry'){
         evt.initEvent("click", true, true);
         chrome.runtime.sendMessage({
             action: 'newTab',
-            taburl: document.querySelector('.pic a').href
+            taburl: document.querySelector('.pic a').href + '&from=taotry'
         });
         chrome.runtime.sendMessage({
             action: 'question',

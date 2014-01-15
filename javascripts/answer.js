@@ -11,7 +11,7 @@ var para = (function(a) {
     return b;
 })(window.location.search.substr(1).split('&'));
 
-if(para.viewfrom){
+if(para.from=='taotry'){
     window.addEventListener('load', function(){
         chrome.runtime.sendMessage({
             'action': 'keyword'
