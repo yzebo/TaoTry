@@ -12,33 +12,37 @@ var para = (function(a) {
 })(window.location.search.substr(1).split('&'));
 
 if(para.from=='taotry'){
-    window.addEventListener('load', function(){
-        chrome.runtime.sendMessage({
-            'action': 'keyword'
-        }, function(response) {
-            var arr = {     //normal answer array
-                '试用品申请成功后需提交':'试用报告'
-            }
-            var list=document.querySelectorAll('.attributes-list li');
+    chrome.runtime.sendMessage({
+        'action': 'keyword'
+    }, function(response) {
+        var arr = {     //normal answer array
+            '试用品申请成功后需提交':'试用报告'
+        }
+        var myTimer=setInterval(function(){
             var ans;
-            for (var i = 0; i < list.length; i++) {
-                if(list[i].innerHTML.indexOf(response.keyword+':')>=0){
-                    ans=list[i].title;
+            var attrib=document.querySelectorAll(".attributes-list li");
+            for (var i = 0; i < attrib.length; i++) {
+                if(attrib[i].innerHTML.indexOf(response.keyword+':')>=0){
+                    clearInterval(myTimer);
+                    ans=attrib[i].title;
+                    break;
                 }
             };
-            if(!ans && arr[response.keyword]){
-                ans=arr[response.keyword];
+            if(attrib.length){
+                if(!ans && arr[response.keyword]){
+                    ans=arr[response.keyword];
+                }
+                if(!ans){
+                    ans='找不到答案';
+                }
+                chrome.runtime.sendMessage({
+                    action: "answer",
+                    answer: ans
+                });
+                chrome.runtime.sendMessage({
+                    action: "closeTab"
+                });
             }
-            if(!ans){
-                ans='找不到答案';
-            }
-            chrome.runtime.sendMessage({
-                action: "answer",
-                answer: ans
-            });
-            chrome.runtime.sendMessage({
-                action: "closeTab"
-            });
-        });
+        }, 5);
     });
 }
