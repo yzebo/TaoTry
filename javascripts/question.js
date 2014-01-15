@@ -38,26 +38,30 @@ if(para.from=='taotry'){
                         if(answer=='找不到答案' || document.querySelector('.detail-error')){
                             chrome.runtime.sendMessage({
                                 action: "notify",
-                                title: 'TaoTry',
+                                title: document.querySelector('.current').innerText,
                                 msg: '自动获取答案失败，请手动输入！'
                             });
                         }
-                        document.querySelector('.try-btn-submit').dispatchEvent(evt);
+                        if(!document.querySelector('.try-btn-submit') && document.querySelector('.error')){
+                            chrome.runtime.sendMessage({
+                                action: "notify",
+                                title: document.querySelector('.current').innerText,
+                                msg: '提交试用申请失败，今日申请次数已达上限！'
+                            });
+                        }
+                        else{
+                            setTimeout(function(){
+                                document.querySelector('.try-btn-submit').dispatchEvent(evt);
+                            },300);
+                        }
                         setTimeout(function(){
                             if(document.querySelector('.fy-icon')){
                                 chrome.runtime.sendMessage({
                                     action: "closeTab"
                                 });
                             }
-                        },1000);
-                    },1000);
-                }
-                else{
-                    chrome.runtime.sendMessage({
-                        action: "notify",
-                        title: 'TaoTry',
-                        msg: '自动获取答案失败，请手动输入！'
-                    });
+                        },800);
+                    },500);
                 }
             });
         }, 1000);
