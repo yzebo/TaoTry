@@ -43,10 +43,12 @@ function Login(url){
 }
 
 function notify(title,msg) {
-    chrome.notifications.create("", {
-                type: "basic",
-                title: title,
-                message: msg,
-                iconUrl: "icons/icon.png"
-    }, function(){});
+    if(localStorage['inform']=='true'){
+        chrome.notifications.create("", {
+                    type: "basic",
+                    title: title,
+                    message: msg,
+                    iconUrl: "icons/icon.png"
+        }, function(){});
+    }
 }
