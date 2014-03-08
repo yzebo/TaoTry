@@ -26,6 +26,7 @@ function restoreOptions() {
         }
     }
     else{
+        localStorage['num'] = 0;
         $('#num').text(0);
         $('small').text('今天还没申请试用');
     }
