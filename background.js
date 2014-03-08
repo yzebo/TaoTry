@@ -37,7 +37,7 @@ chrome.runtime.onMessage.addListener(
 
 function Login(url){
     chrome.tabs.create({
-        url: "https://login.taobao.com/member/login.jhtml?from=taocoin&redirect_url="+encodeURIComponent(url),
+        url: "https://login.taobao.com/member/login.jhtml?from=taotry&redirect_url="+encodeURIComponent(url),
         active: true
     });
 }
