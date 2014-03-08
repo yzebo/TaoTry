@@ -31,6 +31,12 @@ chrome.runtime.onMessage.addListener(
         case 'closeTab':
             chrome.tabs.remove(sender.tab.id, function(){});
             break;
+        case 'success':
+            var num=parseInt(localStorage['num']) || 0;
+            localStorage['num'] = num + 1;
+            localStorage['lastday'] = (new Date).getDate();
+            chrome.tabs.remove(sender.tab.id, function(){});
+            break;
         }
     }
 )
