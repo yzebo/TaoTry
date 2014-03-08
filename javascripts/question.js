@@ -60,7 +60,7 @@ if(para.from=='taotry'){
                             setTimeout(function(){
                                 if(document.querySelector('.fy-icon')){
                                     chrome.runtime.sendMessage({
-                                        action: "closeTab"
+                                        action: "success"
                                     });
                                 }
                             },800);
